@@ -1,0 +1,9 @@
+.options{
+    display:flex;
+    flex-direction: column;
+}
+
+.quesOption{
+    display:flex;
+    flex-direction: row;
+}
