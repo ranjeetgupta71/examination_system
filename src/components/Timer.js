@@ -1,42 +1,47 @@
 import React, { useEffect, useState } from "react";
+import Questions from "./Questions";
 
-const Timer = ()=>{
-    const [time,setTime] = useState(120);
-    const [showMessage,setShowMessage] = useState(false);
+const Timer = (props) => {
+  const { totalMarks, submit, submitted } = props;
+  console.log("4: ", totalMarks);
+  const [time, setTime] = useState(120);
+  const [showMessage, setShowMessage] = useState(false);
 
-    var minutes = Math.floor(time/60);
-    var seconds = time%60;
+  var minutes = Math.floor(time / 60);
+  var seconds = time % 60;
 
-    const handleTick=()=>{
-        setTime(prevTime=>prevTime-1);
+  const handleTick = () => {
+    setTime((prevTime) => prevTime - 1);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleTick();
+    }, 1000);
+    if (time === 0 || submitted) {
+      submit();
+      clearInterval(timer);
+      setShowMessage(true);
     }
+    return () => {
+      clearInterval(timer);
+    };
+  }, [time, submit, submitted]);
 
-    useEffect(()=>{
-        const timer= setInterval(()=>{
-            handleTick();
-        },1000)
-        if(time === 0){
-            clearInterval(timer);
-            setShowMessage(true);
-        }
-        return () => {
-            clearInterval(timer);
-          };
-    },[time])
-
-    return(
+  return (
+    <div>
+      {showMessage ? (
         <div>
-            {showMessage?
-            (<div>
-                <p>Congratulation</p>
-            </div>)
-            :
-            (<div>
-            Time Left: {minutes.toString().padStart(2,"0") +"m" }: {seconds.toString().padStart(2,"0")+"s"}
-            </div>)}
+          <p>Congratulation Your Score is {totalMarks}</p>
         </div>
-        
-    )
-}
+      ) : (
+        <div>
+          Time Left: {minutes.toString().padStart(2, "0") + "m"}:{" "}
+          {seconds.toString().padStart(2, "0") + "s"}
+        </div>
+      )}
+    </div>
+  );
+};
 
 export default Timer;
