@@ -3,8 +3,7 @@ import Questions from "./Questions";
 
 const Timer = (props) => {
   const { totalMarks, submit, submitted } = props;
-  console.log("4: ", totalMarks);
-  const [time, setTime] = useState(120);
+  const [time, setTime] = useState(12000);
   const [showMessage, setShowMessage] = useState(false);
 
   var minutes = Math.floor(time / 60);
@@ -18,11 +17,13 @@ const Timer = (props) => {
     const timer = setInterval(() => {
       handleTick();
     }, 1000);
+
     if (time === 0 || submitted) {
       submit();
       clearInterval(timer);
       setShowMessage(true);
     }
+
     return () => {
       clearInterval(timer);
     };
