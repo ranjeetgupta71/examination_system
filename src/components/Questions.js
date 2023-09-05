@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Questions.css";
 import Timer from "./Timer";
 
@@ -38,15 +38,11 @@ const Questions = () => {
       var userSelectedAnswer = userAnswer[i];
       console.log("userAnwser : ", userAnswer[i]);
       if (userSelectedAnswer === correctAnswer) {
-        setTotalMarks((prevState) => prevState + 1);
+        setTotalMarks(totalMarks + 1);
       }
     }
     console.log("39: ", totalMarks);
   };
-
-  useEffect(() => {
-    console.log(totalMarks);
-  }, [totalMarks]);
 
   const reset = () => {
     setUserAnswer(Array(5).fill(null));
@@ -97,9 +93,11 @@ const Questions = () => {
     },
   ];
 
+  console.log("totalScore", totalMarks);
+
   return (
     <>
-      <Timer totalMarks={totalMarks} submit={submit} submitted={submitted} />
+      <Timer submit={submit} submitted={submitted} />
       {!submitted && (
         <>
           <div style={{ display: "flex", flexDirection: "row" }}>
