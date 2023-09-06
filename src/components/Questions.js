@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Questions.css";
 import Timer from "./Timer";
+import Pallete from "./Pallete";
 
 const Questions = () => {
   const [index, setIndex] = useState(0);
@@ -8,6 +9,14 @@ const Questions = () => {
   const [totalMarks, setTotalMarks] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [visited, setVisited] = useState(Array(5).fill(false));
+  const totalPages = 5;
+
+  useEffect(() => {
+    const updateVisitedArray = [...visited];
+    updateVisitedArray[0] = true;
+    setVisited(updateVisitedArray);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleOptionClick = (event) => {
     const selectedOption = event.target.value;
@@ -16,23 +25,18 @@ const Questions = () => {
     setUserAnswer(updatedUserAnswer);
   };
 
-  const handleColor = (currentIndex) => {
-    if (index === currentIndex) {
-      return "blue";
-    } else if (userAnswer[currentIndex]) {
-      return "green";
-    } else if (visited[currentIndex]) {
-      return "red";
-    } else return "#808080";
+  const handleQuestionNavigation = (indexFromPallete, visited) => {
+    const updateVisitedArray = [...visited];
+    updateVisitedArray[indexFromPallete] = true;
+    setVisited(updateVisitedArray);
+    setIndex(indexFromPallete);
   };
-
-  const totalPages = 5;
 
   const prev = () => {
     const updateVisitedArray = [...visited];
     updateVisitedArray[index] = true;
     setVisited(updateVisitedArray);
-    console.log("visited : ", visited);
+    console.log("visited prev: ", visited);
     if (index > 0) setIndex((prevIndex) => prevIndex - 1);
   };
 
@@ -40,7 +44,7 @@ const Questions = () => {
     const updateVisitedArray = [...visited];
     updateVisitedArray[index] = true;
     setVisited(updateVisitedArray);
-    console.log("visited : ", visited);
+    console.log("visited next : ", visited);
     // setVisited[index] = true;
     if (index < 4) {
       console.log("14", index);
@@ -179,23 +183,13 @@ const Questions = () => {
               </div>
             </div>
 
-            <div>
-              {Array.from({ length: totalPages }).map((_, i) => (
-                <button
-                  onClick={() => {
-                    const updateVisitedArray = [...visited];
-                    updateVisitedArray[index] = true;
-                    setVisited(updateVisitedArray);
-                    console.log("visited : ", visited);
-                    setIndex(i);
-                  }}
-                  key={i}
-                  style={{ backgroundColor: handleColor(i) }}
-                >
-                  {i + 1}
-                </button>
-              ))}
-            </div>
+            <Pallete
+              index={index}
+              totalPages={totalPages}
+              visited={visited}
+              userAnswer={userAnswer}
+              handleQuestionNavigation={handleQuestionNavigation}
+            />
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div className="square-box-green"></div>Attempted
