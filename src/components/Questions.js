@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Questions.css";
 import Timer from "./Timer";
 
@@ -7,24 +7,38 @@ const Questions = () => {
   const [userAnswer, setUserAnswer] = useState(Array(5).fill(null));
   const [totalMarks, setTotalMarks] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [visited, setVisited] = useState(Array(5).fill(false));
 
-  const handler = (event) => {
+  const handleOptionClick = (event) => {
+    const updateVisitedArray = [...visited];
+    updateVisitedArray[index] = true;
+
+    setVisited(updateVisitedArray);
+
     const selectedOption = event.target.value;
-    console.log("selectedOption: ", selectedOption);
     const updatedUserAnswer = [...userAnswer];
     updatedUserAnswer[index] = selectedOption;
     setUserAnswer(updatedUserAnswer);
+  };
 
-    console.log("User Answers:", updatedUserAnswer);
+  const handleColor = (currentIndex) => {
+    if (index === currentIndex) {
+      return "blue";
+    } else if (userAnswer[currentIndex] !== null) {
+      return "green";
+    } else if (userAnswer[currentIndex] === null && visited[currentIndex] === true) return "red";
+    else return "#808080";
   };
 
   const totalPages = 5;
 
   const prev = () => {
+    setVisited[index] = true;
     if (index > 0) setIndex((prevIndex) => prevIndex - 1);
   };
 
   const next = () => {
+    setVisited[index] = true;
     if (index < 4) {
       console.log("14", index);
       setIndex((prevIndex) => prevIndex + 1);
@@ -33,22 +47,19 @@ const Questions = () => {
 
   const submit = () => {
     setSubmitted(true);
+
     for (let i = 0; i < questionsAnswerData.length; i++) {
       var correctAnswer = questionsAnswerData[i].Answer;
       var userSelectedAnswer = userAnswer[i];
-      console.log("userAnwser : ", userAnswer[i]);
+
       if (userSelectedAnswer === correctAnswer) {
-        setTotalMarks(totalMarks + 1);
+        setTotalMarks((prevState) => prevState + 1);
+        console.log("here");
       }
     }
-    console.log("39: ", totalMarks);
   };
 
-  const reset = () => {
-    setUserAnswer(Array(5).fill(null));
-    setTotalMarks(0);
-    setIndex(0);
-  };
+  const reset = () => {};
 
   const questionsAnswerData = [
     {
@@ -93,11 +104,9 @@ const Questions = () => {
     },
   ];
 
-  console.log("totalScore", totalMarks);
-
   return (
     <>
-      <Timer submit={submit} submitted={submitted} />
+      <Timer totalMarks={totalMarks} submit={submit} submitted={submitted} />
       {!submitted && (
         <>
           <div style={{ display: "flex", flexDirection: "row" }}>
@@ -114,7 +123,7 @@ const Questions = () => {
                           type="radio"
                           name={`choice_${index}`}
                           value={`${questionsAnswerData[index].option1}`}
-                          onChange={handler}
+                          onChange={handleOptionClick}
                           checked={userAnswer[index] === questionsAnswerData[index].option1}
                         />{" "}
                         {questionsAnswerData[index].option1}
@@ -124,7 +133,7 @@ const Questions = () => {
                           type="radio"
                           name={`choice_${index}`}
                           value={`${questionsAnswerData[index].option2}`}
-                          onChange={handler}
+                          onChange={handleOptionClick}
                           checked={userAnswer[index] === questionsAnswerData[index].option2}
                         />{" "}
                         {questionsAnswerData[index].option2}
@@ -134,7 +143,7 @@ const Questions = () => {
                           type="radio"
                           name={`choice_${index}`}
                           value={`${questionsAnswerData[index].option3}`}
-                          onChange={handler}
+                          onChange={handleOptionClick}
                           checked={userAnswer[index] === questionsAnswerData[index].option3}
                         />{" "}
                         {questionsAnswerData[index].option3}
@@ -144,7 +153,7 @@ const Questions = () => {
                           type="radio"
                           name={`choice_${index}`}
                           value={`${questionsAnswerData[index].option4}`}
-                          onChange={handler}
+                          onChange={handleOptionClick}
                           checked={userAnswer[index] === questionsAnswerData[index].option4}
                         />{" "}
                         {questionsAnswerData[index].option4}
@@ -155,7 +164,7 @@ const Questions = () => {
                       <button type="button" onClick={next} disabled={index === totalPages - 1}>
                         Next
                       </button>
-                      <button onClick={reset} disabled={submitted === true}>
+                      <button type="button" onClick={reset} disabled={submitted === true}>
                         Reset{" "}
                       </button>
                       <button type="button" onClick={submit} disabled={submitted === true}>
@@ -168,46 +177,22 @@ const Questions = () => {
             </div>
 
             <div>
-              <button
-                onClick={() => {
-                  setIndex(0);
-                }}
-              >
-                1
-              </button>
-              <button
-                onClick={() => {
-                  setIndex(1);
-                }}
-              >
-                2
-              </button>
-              <button
-                onClick={() => {
-                  setIndex(2);
-                }}
-              >
-                3
-              </button>
-              <br />
-              <button
-                onClick={() => {
-                  setIndex(3);
-                }}
-              >
-                4
-              </button>
-              <button
-                onClick={() => {
-                  setIndex(4);
-                }}
-              >
-                5
-              </button>
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  onClick={() => {
+                    setIndex(i);
+                    setVisited[index] = true;
+                  }}
+                  key={i}
+                  style={{ backgroundColor: handleColor(i) }}
+                >
+                  {i + 1}
+                </button>
+              ))}
             </div>
           </div>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <div className="square-box-green"></div>Submitted
+            <div className="square-box-green"></div>Attempted
             <div className="square-box-red"></div>Unattempted
             <div className="square-box-visited"></div>visited + Unattempted
           </div>
