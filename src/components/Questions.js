@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./Questions.css";
 import Timer from "./Timer";
 
@@ -10,11 +10,6 @@ const Questions = () => {
   const [visited, setVisited] = useState(Array(5).fill(false));
 
   const handleOptionClick = (event) => {
-    const updateVisitedArray = [...visited];
-    updateVisitedArray[index] = true;
-
-    setVisited(updateVisitedArray);
-
     const selectedOption = event.target.value;
     const updatedUserAnswer = [...userAnswer];
     updatedUserAnswer[index] = selectedOption;
@@ -24,21 +19,29 @@ const Questions = () => {
   const handleColor = (currentIndex) => {
     if (index === currentIndex) {
       return "blue";
-    } else if (userAnswer[currentIndex] !== null) {
+    } else if (userAnswer[currentIndex]) {
       return "green";
-    } else if (userAnswer[currentIndex] === null && visited[currentIndex] === true) return "red";
-    else return "#808080";
+    } else if (visited[currentIndex]) {
+      return "red";
+    } else return "#808080";
   };
 
   const totalPages = 5;
 
   const prev = () => {
-    setVisited[index] = true;
+    const updateVisitedArray = [...visited];
+    updateVisitedArray[index] = true;
+    setVisited(updateVisitedArray);
+    console.log("visited : ", visited);
     if (index > 0) setIndex((prevIndex) => prevIndex - 1);
   };
 
   const next = () => {
-    setVisited[index] = true;
+    const updateVisitedArray = [...visited];
+    updateVisitedArray[index] = true;
+    setVisited(updateVisitedArray);
+    console.log("visited : ", visited);
+    // setVisited[index] = true;
     if (index < 4) {
       console.log("14", index);
       setIndex((prevIndex) => prevIndex + 1);
@@ -123,7 +126,7 @@ const Questions = () => {
                           type="radio"
                           name={`choice_${index}`}
                           value={`${questionsAnswerData[index].option1}`}
-                          onChange={handleOptionClick}
+                          onChange={(event) => handleOptionClick(event, 1)}
                           checked={userAnswer[index] === questionsAnswerData[index].option1}
                         />{" "}
                         {questionsAnswerData[index].option1}
@@ -180,8 +183,11 @@ const Questions = () => {
               {Array.from({ length: totalPages }).map((_, i) => (
                 <button
                   onClick={() => {
+                    const updateVisitedArray = [...visited];
+                    updateVisitedArray[index] = true;
+                    setVisited(updateVisitedArray);
+                    console.log("visited : ", visited);
                     setIndex(i);
-                    setVisited[index] = true;
                   }}
                   key={i}
                   style={{ backgroundColor: handleColor(i) }}
