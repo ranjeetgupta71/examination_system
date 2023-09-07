@@ -66,7 +66,11 @@ const Questions = () => {
     }
   };
 
-  const reset = () => {};
+  const reset = () => {
+    const updatedUserAnswer = [...userAnswer];
+    updatedUserAnswer[index] = null;
+    setUserAnswer(updatedUserAnswer);
+  };
 
   const questionsAnswerData = [
     {
@@ -171,7 +175,7 @@ const Questions = () => {
                       <button type="button" onClick={next} disabled={index === totalPages - 1}>
                         Next
                       </button>
-                      <button type="button" onClick={reset} disabled={submitted === true}>
+                      <button type="button" onClick={reset} disabled={userAnswer[index] === null}>
                         Reset{" "}
                       </button>
                       <button type="button" onClick={submit} disabled={submitted === true}>
