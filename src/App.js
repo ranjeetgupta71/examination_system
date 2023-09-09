@@ -1,16 +1,15 @@
-import "./App.css";
-import MainPage from "./components/MainPage";
-import Pallete from "./components/Pallete";
-function App() {
-  return (
-    <div>
-      {/* <Header/> */}
-      <MainPage />
-      {/* <Login/> */}
+import React, { useState } from "react";
+import Login from "./components/Login";
+import ExamPage from "./components/ExamPage";
 
-      {/* <Pallete /> */}
-    </div>
-  );
-}
+const App = () => {
+  const [submitted, setSubmitted] = useState(true);
+
+  const handleParentSubmit = (submitted) => {
+    setSubmitted(submitted);
+  };
+
+  return <div>{submitted ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />}</div>;
+};
 
 export default App;
