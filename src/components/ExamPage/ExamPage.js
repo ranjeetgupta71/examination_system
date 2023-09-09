@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./Questions.css";
-import Timer from "./Timer";
-import Pallete from "./Pallete";
-import QuizQuestions from "./QuizQuestions";
+import Timer from "../Timer";
+import Pallete from "../Pallete";
+import QuizQuestions from "../Questions";
 
 const Questions = () => {
   const [index, setIndex] = useState(0);
