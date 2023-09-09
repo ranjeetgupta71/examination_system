@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Questions from "./ButtonPanel";
 
 const Timer = (props) => {
   const { totalMarks, submit, submitted } = props;
