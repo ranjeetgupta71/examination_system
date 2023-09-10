@@ -1,3 +1,4 @@
+import Container from "react-bootstrap/Container";
 import React, { useState } from "react";
 import Login from "./components/Login";
 import ExamPage from "./components/ExamPage";
@@ -10,9 +11,9 @@ const App = () => {
   };
 
   return (
-    <div style={{ margin: "20px 80px" }}>
+    <Container fluid>
       {isLoggedIn ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />}
-    </div>
+    </Container>
   );
 };
 
