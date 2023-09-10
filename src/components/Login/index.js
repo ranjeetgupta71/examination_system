@@ -1,10 +1,12 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
+
 import "./Login.css";
 
 const Login = ({ handleParentSubmit }) => {
   return (
-    <div className="login-page">
-      <div className="login-form">
+    <Card className="login-form">
+      <div>
         <h2>Login</h2>
         <div className="form-container">
           <form>
@@ -44,7 +46,7 @@ const Login = ({ handleParentSubmit }) => {
           </form>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 
