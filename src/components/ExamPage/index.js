@@ -67,50 +67,44 @@ const Questions = () => {
     setUserAnswer(updatedUserAnswer);
   };
 
+  if (submitted) {
+    <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />;
+  }
+
   return (
     <>
-      {submitted ? (
-        <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />
-      ) : (
-        <>
-          <Timer onSubmit={handleSubmit} />
-          <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
-            <Question
-              onDataReceived={handleData}
-              currentQuestionIndex={currentQuestionIndex}
-              userAnswer={userAnswer}
-              handleOptionClick={handleOptionClick}
-            />
-            <Pallete
-              currentIndex={currentQuestionIndex}
-              totalPages={5}
-              visited={visited}
-              userAnswer={userAnswer}
-              handleQuestionNavigation={handleQuestionNavigation}
-            />
-          </div>
+      <Timer onSubmit={handleSubmit} />
+      <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
+        <Question
+          onDataReceived={handleData}
+          currentQuestionIndex={currentQuestionIndex}
+          userAnswer={userAnswer}
+          handleOptionClick={handleOptionClick}
+        />
+        <Pallete
+          currentIndex={currentQuestionIndex}
+          totalPages={5}
+          visited={visited}
+          userAnswer={userAnswer}
+          handleQuestionNavigation={handleQuestionNavigation}
+        />
+      </div>
 
-          <div style={{ margin: "20px" }}>
-            <button type="button" onClick={prev} disabled={currentQuestionIndex === 0}>
-              Prev
-            </button>
-            <button type="button" onClick={next} disabled={currentQuestionIndex === 4}>
-              Next
-            </button>
-            <button
-              type="button"
-              onClick={reset}
-              disabled={userAnswer[currentQuestionIndex] === null}
-            >
-              Reset{" "}
-            </button>
-            <button type="button" onClick={handleSubmit} disabled={submitted === true}>
-              Submit
-            </button>
-          </div>
-          <Legends />
-        </>
-      )}
+      <div style={{ margin: "20px" }}>
+        <button type="button" onClick={prev} disabled={currentQuestionIndex === 0}>
+          Prev
+        </button>
+        <button type="button" onClick={next} disabled={currentQuestionIndex === 4}>
+          Next
+        </button>
+        <button type="button" onClick={reset} disabled={userAnswer[currentQuestionIndex] === null}>
+          Reset{" "}
+        </button>
+        <button type="button" onClick={handleSubmit} disabled={submitted === true}>
+          Submit
+        </button>
+      </div>
+      <Legends />
     </>
   );
 };
