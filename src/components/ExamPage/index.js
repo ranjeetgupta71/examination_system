@@ -8,7 +8,7 @@ import ResultPage from "../ResultPage";
 import "./index.css";
 
 const Questions = () => {
-  const [index, setIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState(Array(5).fill(null));
   const [submitted, setSubmitted] = useState(false);
   const [visited, setVisited] = useState(Array(5).fill(false));
@@ -28,7 +28,7 @@ const Questions = () => {
   const handleOptionClick = (event) => {
     const selectedOption = event.target.value;
     const updatedUserAnswer = [...userAnswer];
-    updatedUserAnswer[index] = selectedOption;
+    updatedUserAnswer[currentQuestionIndex] = selectedOption;
 
     setUserAnswer(updatedUserAnswer);
   };
@@ -37,26 +37,26 @@ const Questions = () => {
     const updateVisitedArray = [...visited];
     updateVisitedArray[indexFromPallete] = true;
     setVisited(updateVisitedArray);
-    setIndex(indexFromPallete);
+    setCurrentQuestionIndex(indexFromPallete);
   };
 
   const prev = () => {
     const updateVisitedArray = [...visited];
-    updateVisitedArray[index] = true;
+    updateVisitedArray[currentQuestionIndex] = true;
     setVisited(updateVisitedArray);
     console.log("visited prev: ", visited);
-    if (index > 0) setIndex((prevIndex) => prevIndex - 1);
+    if (currentQuestionIndex > 0) setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
   };
 
   const next = () => {
     const updateVisitedArray = [...visited];
-    updateVisitedArray[index] = true;
+    updateVisitedArray[currentQuestionIndex] = true;
     setVisited(updateVisitedArray);
     console.log("visited next : ", visited);
-    // setVisited[index] = true;
-    if (index < 4) {
-      console.log("14", index);
-      setIndex((prevIndex) => prevIndex + 1);
+    // setVisited[currentQuestionIndex] = true;
+    if (currentQuestionIndex < 4) {
+      console.log("14", currentQuestionIndex);
+      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     }
   };
 
@@ -66,7 +66,7 @@ const Questions = () => {
 
   const reset = () => {
     const updatedUserAnswer = [...userAnswer];
-    updatedUserAnswer[index] = null;
+    updatedUserAnswer[currentQuestionIndex] = null;
     setUserAnswer(updatedUserAnswer);
   };
 
@@ -80,12 +80,12 @@ const Questions = () => {
           <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
             <Question
               onDataReceived={handleData}
-              index={index}
+              currentQuestionIndex={currentQuestionIndex}
               userAnswer={userAnswer}
               handleOptionClick={handleOptionClick}
             />
             <Pallete
-              index={index}
+              currentQuestionIndex={currentQuestionIndex}
               totalPages={5}
               visited={visited}
               userAnswer={userAnswer}
@@ -94,13 +94,17 @@ const Questions = () => {
           </div>
 
           <div style={{ margin: "20px" }}>
-            <button type="button" onClick={prev} disabled={index === 0}>
+            <button type="button" onClick={prev} disabled={currentQuestionIndex === 0}>
               Prev
             </button>
-            <button type="button" onClick={next} disabled={index === 4}>
+            <button type="button" onClick={next} disabled={currentQuestionIndex === 4}>
               Next
             </button>
-            <button type="button" onClick={reset} disabled={userAnswer[index] === null}>
+            <button
+              type="button"
+              onClick={reset}
+              disabled={userAnswer[currentQuestionIndex] === null}
+            >
               Reset{" "}
             </button>
             <button type="button" onClick={submit} disabled={submitted === true}>
