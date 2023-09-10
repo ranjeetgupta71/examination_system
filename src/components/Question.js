@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-const QuizQuestions = ({ onDataReceived, index, userAnswer, handleOptionClick }) => {
+const Question = ({ onDataReceived, currentQuestionIndex, userAnswer, handleOptionClick }) => {
   const questionsAnswerData = [
     {
       question: "Capital of India?",
@@ -37,20 +37,23 @@ const QuizQuestions = ({ onDataReceived, index, userAnswer, handleOptionClick })
   return (
     <>
       <h1>
-        {index + 1}. {questionsAnswerData[index].question}
+        {currentQuestionIndex + 1}. {questionsAnswerData[currentQuestionIndex].question}
       </h1>
       <div className="quesOption">
         <form className="options">
-          {Array.from({ length: 4 }).map((_, option) => (
+          {Array.from({ length: 4 }).map((_, index) => (
             <label>
               <input
                 type="radio"
-                name={`choice_${index}`}
-                value={`${questionsAnswerData[index].options[option]}`}
+                name={`choice_${currentQuestionIndex}`}
+                value={`${questionsAnswerData[currentQuestionIndex].options[index]}`}
                 onChange={handleOptionClick}
-                checked={userAnswer[index] === questionsAnswerData[index].options[option]}
+                checked={
+                  userAnswer[currentQuestionIndex] ===
+                  questionsAnswerData[currentQuestionIndex].options[index]
+                }
               />{" "}
-              {questionsAnswerData[index].options[option]}
+              {questionsAnswerData[currentQuestionIndex].options[index]}
             </label>
           ))}
         </form>
@@ -58,4 +61,4 @@ const QuizQuestions = ({ onDataReceived, index, userAnswer, handleOptionClick })
     </>
   );
 };
-export default QuizQuestions;
+export default Question;

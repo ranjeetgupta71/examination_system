@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Timer from "../Timer";
 import Pallete from "../Pallete";
-import Question from "../Questions";
+import Question from "../Question";
 import Legends from "../Legends";
 import ResultPage from "../ResultPage";
 
@@ -33,7 +33,7 @@ const Questions = () => {
     setUserAnswer(updatedUserAnswer);
   };
 
-  const handleQuestionNavigation = (indexFromPallete, visited) => {
+  const handleQuestionNavigation = (indexFromPallete) => {
     const updateVisitedArray = [...visited];
     updateVisitedArray[indexFromPallete] = true;
     setVisited(updateVisitedArray);
@@ -85,7 +85,7 @@ const Questions = () => {
               handleOptionClick={handleOptionClick}
             />
             <Pallete
-              currentQuestionIndex={currentQuestionIndex}
+              currentIndex={currentQuestionIndex}
               totalPages={5}
               visited={visited}
               userAnswer={userAnswer}

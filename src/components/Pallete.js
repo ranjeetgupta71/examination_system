@@ -1,12 +1,12 @@
 import React from "react";
 
-const Pallete = ({ index: current, totalPages, visited, userAnswer, handleQuestionNavigation }) => {
-  const findPalleteColor = (i) => {
-    if (current === i) {
+const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestionNavigation }) => {
+  const findPalleteColor = (palleteIndex) => {
+    if (currentIndex === palleteIndex) {
       return "blue";
-    } else if (userAnswer[i]) {
+    } else if (userAnswer[palleteIndex]) {
       return "green";
-    } else if (visited[i] && userAnswer[i] === null) {
+    } else if (visited[palleteIndex] && userAnswer[palleteIndex] === null) {
       return "red";
     } else {
       return "#808080";
@@ -14,7 +14,7 @@ const Pallete = ({ index: current, totalPages, visited, userAnswer, handleQuesti
   };
 
   const handleClick = (i) => {
-    handleQuestionNavigation(i, visited);
+    handleQuestionNavigation(i);
   };
 
   return (
