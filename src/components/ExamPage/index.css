@@ -1,0 +1,12 @@
+.question-pallete-wrapper {
+  display: flex;
+}
+
+.question-wrapper {
+  flex: 2;
+}
+
+.pallete-wrapper {
+  flex: 1;
+  margin-left: 20px;
+}

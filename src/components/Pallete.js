@@ -1,4 +1,5 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
 import Legends from "./Legends";
 
 const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestionNavigation }) => {
@@ -19,7 +20,7 @@ const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestion
   };
 
   return (
-    <div style={{ border: "1px solid black", padding: "50px", backgroundColor: "white" }}>
+    <Card>
       {Array.from({ length: totalPages }).map((_, index) => (
         <span key={index}>
           <button
@@ -38,7 +39,7 @@ const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestion
       ))}
 
       <Legends />
-    </div>
+    </Card>
   );
 };
 

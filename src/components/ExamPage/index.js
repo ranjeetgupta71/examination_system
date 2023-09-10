@@ -74,19 +74,25 @@ const Questions = () => {
   return (
     <div>
       <Timer onSubmit={() => setSubmitted(true)} />
-      <Question
-        onDataReceived={handleData}
-        currentQuestionIndex={currentQuestionIndex}
-        userAnswer={userAnswer}
-        handleOptionClick={handleOptionClick}
-      />
-      <Pallete
-        currentIndex={currentQuestionIndex}
-        totalPages={5}
-        visited={visited}
-        userAnswer={userAnswer}
-        handleQuestionNavigation={handleQuestionNavigation}
-      />
+      <div className="question-pallete-wrapper">
+        <div className="question-wrapper">
+          <Question
+            onDataReceived={handleData}
+            currentQuestionIndex={currentQuestionIndex}
+            userAnswer={userAnswer}
+            handleOptionClick={handleOptionClick}
+          />
+        </div>
+        <div className="pallete-wrapper">
+          <Pallete
+            currentIndex={currentQuestionIndex}
+            totalPages={5}
+            visited={visited}
+            userAnswer={userAnswer}
+            handleQuestionNavigation={handleQuestionNavigation}
+          />
+        </div>
+      </div>
 
       <div style={{ margin: "10px" }}>
         <button type="button" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
