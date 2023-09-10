@@ -3,10 +3,10 @@
     flex-direction: column;
 }
 
-.quesOption{
+/* .quesOption{
     display:flex;
     flex-direction: row;
-}
+} */
 
 .square-box-green{
     height:30px;
@@ -17,7 +17,7 @@
 .square-box-red{
     height:30px;
     width:30px;
-    background-color: rgb(4, 25, 16);
+    background-color: rgb(230, 10, 10);
     margin:10px
 }
 .square-box-visited{
@@ -25,4 +25,17 @@
     width:30px;
     background-color: rgb(255, 0, 242);
     margin:10px
+}
+
+.square-box-blue{
+    height:30px;
+    width:30px;
+    background-color: blue;
+    margin: 10px;
+}
+.square-box-gray{
+    height:30px;
+    width:30px;
+    background-color: gray;
+    margin: 10px;
 }

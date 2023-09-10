@@ -76,7 +76,7 @@ const Questions = () => {
   return (
     <div>
       <Timer onSubmit={() => setSubmitted(true)} />
-      <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <Question
           onDataReceived={handleData}
           currentQuestionIndex={currentQuestionIndex}
@@ -92,7 +92,7 @@ const Questions = () => {
         />
       </div>
 
-      <div style={{ margin: "20px" }}>
+      <div style={{ margin: "10px" }}>
         <button type="button" onClick={prev} disabled={currentQuestionIndex === 0}>
           Prev
         </button>
@@ -110,7 +110,6 @@ const Questions = () => {
           Submit
         </button>
       </div>
-      <Legends />
     </div>
   );
 };

@@ -9,7 +9,11 @@ const App = () => {
     setIsLoggedIn(submitted);
   };
 
-  return isLoggedIn ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />;
+  return (
+    <div style={{ margin: "20px 80px" }}>
+      {isLoggedIn ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />}
+    </div>
+  );
 };
 
 export default App;

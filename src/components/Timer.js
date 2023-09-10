@@ -22,10 +22,20 @@ const Timer = ({ onSubmit }) => {
     return () => {
       clearInterval(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        border: "1px solid black",
+        width: "180px",
+        margin: "10px",
+        borderRadius: "4px",
+        justifyContent: "center",
+      }}
+    >
       Time Left: {minutes.toString().padStart(2, "0") + "m"}:{" "}
       {seconds.toString().padStart(2, "0") + "s"}
     </div>
