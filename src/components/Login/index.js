@@ -30,11 +30,7 @@ const Login = ({ onLogin }) => {
                   placeholder="Password"
                 />
               </div>
-              <button
-                type="submit"
-                className="btn btn-primary submit-btn"
-                onClick={() => onLogin(true)}
-              >
+              <button type="submit" className="btn btn-primary" onClick={() => onLogin(true)}>
                 Submit
               </button>
             </form>
