@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import "./ExamPage.css";
 import Timer from "../Timer";
 import Pallete from "../Pallete";
 import Question from "../Questions";
 import Legends from "../Legends";
 import ResultPage from "../ResultPage";
+
+import "./index.css";
 
 const Questions = () => {
   const [index, setIndex] = useState(0);
