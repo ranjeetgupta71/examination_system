@@ -7,8 +7,8 @@ const Login = ({ handleParentSubmit }) => {
   return (
     <div className="login-page">
       <Card className="login-form">
+        <h2 className="title">Login</h2>
         <div>
-          <h2>Login</h2>
           <div className="form-container">
             <form>
               <div className="form-group">
@@ -32,14 +32,7 @@ const Login = ({ handleParentSubmit }) => {
               </div>
               <button
                 type="submit"
-                className="btn btn-primary"
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginTop: "10px",
-                  marginLeft: "36%",
-                }}
+                className="btn btn-primary submit-btn"
                 onClick={() => handleParentSubmit("true")}
               >
                 Submit
