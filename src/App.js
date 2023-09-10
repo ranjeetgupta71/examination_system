@@ -3,13 +3,13 @@ import Login from "./components/Login";
 import ExamPage from "./components/ExamPage";
 
 const App = () => {
-  const [submitted, setSubmitted] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleParentSubmit = (submitted) => {
-    setSubmitted(submitted);
+    setIsLoggedIn(submitted);
   };
 
-  return <div>{submitted ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />}</div>;
+  return isLoggedIn ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />;
 };
 
 export default App;
