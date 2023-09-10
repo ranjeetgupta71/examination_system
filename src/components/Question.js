@@ -18,7 +18,7 @@ const Question = ({ onDataReceived, currentQuestionIndex, userAnswer, handleOpti
         </h1>
         <div className="question-option">
           {questions[currentQuestionIndex].options.map((option) => (
-            <>
+            <div>
               <input
                 id={option}
                 type="radio"
@@ -28,7 +28,7 @@ const Question = ({ onDataReceived, currentQuestionIndex, userAnswer, handleOpti
                 checked={userAnswer[currentQuestionIndex] === option}
               />{" "}
               <label htmlFor={option}>{option}</label>
-            </>
+            </div>
           ))}
         </div>
       </form>
