@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/Button";
 import Timer from "../Timer";
 import Pallete from "../Pallete";
 import Question from "../Question";
@@ -93,26 +94,33 @@ const Questions = () => {
       </div>
 
       <div style={{ margin: "10px" }}>
-        <button type="button" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
+        <Button
+          variant="primary"
+          type="button"
+          onClick={handlePrevious}
+          disabled={currentQuestionIndex === 0}
+        >
           Prev
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="primary"
           type="button"
           onClick={handleNext}
           disabled={currentQuestionIndex === questionsAnswerData.length - 1}
         >
           Next
-        </button>
-        <button
+        </Button>
+        <Button
+          variant="primary"
           type="button"
           onClick={handleReset}
           disabled={userAnswer[currentQuestionIndex] === null}
         >
           Reset{" "}
-        </button>
-        <button type="submit" onClick={handleSubmit} disabled={submitted}>
+        </Button>
+        <Button variant="danger" type="submit" onClick={handleSubmit} disabled={submitted}>
           Submit
-        </button>
+        </Button>
       </div>
     </div>
   );
