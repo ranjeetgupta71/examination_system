@@ -95,17 +95,17 @@ const Questions = () => {
         <button type="button" onClick={prev} disabled={currentQuestionIndex === 0}>
           Prev
         </button>
-        <button type="button" onClick={next} disabled={currentQuestionIndex === 4}>
+        <button
+          type="button"
+          onClick={next}
+          disabled={currentQuestionIndex === questionsAnswerData.length - 1}
+        >
           Next
         </button>
         <button type="button" onClick={reset} disabled={userAnswer[currentQuestionIndex] === null}>
           Reset{" "}
         </button>
-        <button
-          type="submit"
-          onClick={(event) => handleSubmit(event)}
-          disabled={submitted === true}
-        >
+        <button type="submit" onClick={handleSubmit} disabled={submitted}>
           Submit
         </button>
       </div>
