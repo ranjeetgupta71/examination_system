@@ -44,7 +44,6 @@ const Questions = () => {
     const updateVisitedArray = [...visited];
     updateVisitedArray[currentQuestionIndex] = true;
     setVisited(updateVisitedArray);
-    console.log("visited prev: ", visited);
     if (currentQuestionIndex > 0) setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
   };
 
@@ -52,10 +51,8 @@ const Questions = () => {
     const updateVisitedArray = [...visited];
     updateVisitedArray[currentQuestionIndex] = true;
     setVisited(updateVisitedArray);
-    console.log("visited next : ", visited);
     // setVisited[currentQuestionIndex] = true;
     if (currentQuestionIndex < 4) {
-      console.log("14", currentQuestionIndex);
       setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
     }
   };
