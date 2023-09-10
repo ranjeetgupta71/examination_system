@@ -57,7 +57,7 @@ const Questions = () => {
     }
   };
 
-  const submit = () => {
+  const handleSubmit = () => {
     setSubmitted(true);
   };
 
@@ -73,7 +73,7 @@ const Questions = () => {
         <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />
       ) : (
         <>
-          <Timer submit={submit} submitted={submitted} />
+          <Timer onSubmit={handleSubmit} />
           <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
             <Question
               onDataReceived={handleData}

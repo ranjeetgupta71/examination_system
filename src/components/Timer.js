@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react";
 
-const Timer = (props) => {
-  const { submit, submitted } = props;
+const Timer = ({ onSubmit }) => {
   const [time, setTime] = useState(12000);
-
-  var minutes = Math.floor(time / 60);
-  var seconds = time % 60;
+  const minutes = Math.floor(time / 60);
+  const seconds = time % 60;
 
   const handleTick = () => {
     setTime((prevTime) => prevTime - 1);
@@ -16,8 +14,8 @@ const Timer = (props) => {
       handleTick();
     }, 1000);
 
-    if (time === 0 || submitted) {
-      submit();
+    if (time === 0) {
+      onSubmit();
       clearInterval(timer);
     }
 
@@ -25,10 +23,6 @@ const Timer = (props) => {
       clearInterval(timer);
     };
   }, []);
-
-  if (submitted) {
-    return;
-  }
 
   return (
     <div>
