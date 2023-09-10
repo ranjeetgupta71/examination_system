@@ -3,7 +3,7 @@ import Card from "react-bootstrap/Card";
 
 import "./Login.css";
 
-const Login = ({ handleParentSubmit }) => {
+const Login = ({ onLogin }) => {
   return (
     <div className="login-page">
       <Card className="login-form">
@@ -33,7 +33,7 @@ const Login = ({ handleParentSubmit }) => {
               <button
                 type="submit"
                 className="btn btn-primary submit-btn"
-                onClick={() => handleParentSubmit("true")}
+                onClick={() => onLogin(true)}
               >
                 Submit
               </button>

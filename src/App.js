@@ -8,15 +8,13 @@ import "./App.css";
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  const handleParentSubmit = (submitted) => {
-    setIsLoggedIn(submitted);
+  const handleLogin = (value) => {
+    setIsLoggedIn(value);
   };
 
   return (
     <div className="app">
-      <Container>
-        {isLoggedIn ? <ExamPage /> : <Login handleParentSubmit={handleParentSubmit} />}
-      </Container>
+      <Container>{isLoggedIn ? <ExamPage /> : <Login onLogin={handleLogin} />}</Container>
     </div>
   );
 };
