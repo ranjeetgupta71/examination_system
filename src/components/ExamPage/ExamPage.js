@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import "./Questions.css";
+import "./ExamPage.css";
 import Timer from "../Timer";
 import Pallete from "../Pallete";
-import QuizQuestions from "../Questions";
+import Question from "../Questions";
+import Legends from "../Legends";
 
 const Questions = () => {
   const [index, setIndex] = useState(0);
@@ -84,17 +85,15 @@ const Questions = () => {
       {!submitted && (
         <>
           <div style={{ display: "flex", flexDirection: "row" }}>
-            <div>
-              <Pallete
-                index={index}
-                totalPages={totalPages}
-                visited={visited}
-                userAnswer={userAnswer}
-                handleQuestionNavigation={handleQuestionNavigation}
-              />
-            </div>
+            <Pallete
+              index={index}
+              totalPages={totalPages}
+              visited={visited}
+              userAnswer={userAnswer}
+              handleQuestionNavigation={handleQuestionNavigation}
+            />
           </div>
-          <QuizQuestions
+          <Question
             onDataReceived={handleData}
             index={index}
             userAnswer={userAnswer}
@@ -114,11 +113,7 @@ const Questions = () => {
               Submit
             </button>
           </div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div className="square-box-green"></div>Attempted
-            <div className="square-box-red"></div>Unattempted
-            <div className="square-box-visited"></div>visited + Unattempted
-          </div>
+          <Legends />
         </>
       )}
     </>

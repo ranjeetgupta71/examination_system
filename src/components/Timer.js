@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import TestEnds from "./TestEnds";
 
 const Timer = (props) => {
   const { totalMarks, submit, submitted } = props;
@@ -32,9 +33,7 @@ const Timer = (props) => {
   return (
     <div>
       {submitted ? (
-        <div>
-          <p>Congratulation Your Score is {totalMarks}</p>
-        </div>
+        <TestEnds totalMarks={totalMarks} />
       ) : (
         <div>
           Time Left: {minutes.toString().padStart(2, "0") + "m"}:{" "}
