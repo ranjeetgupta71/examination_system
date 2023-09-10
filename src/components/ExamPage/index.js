@@ -57,7 +57,8 @@ const Questions = () => {
     }
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
     setSubmitted(true);
   };
 
@@ -68,12 +69,12 @@ const Questions = () => {
   };
 
   if (submitted) {
-    <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />;
+    return <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />;
   }
 
   return (
-    <>
-      <Timer onSubmit={handleSubmit} />
+    <div>
+      <Timer onSubmit={() => setSubmitted(true)} />
       <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
         <Question
           onDataReceived={handleData}
@@ -100,12 +101,16 @@ const Questions = () => {
         <button type="button" onClick={reset} disabled={userAnswer[currentQuestionIndex] === null}>
           Reset{" "}
         </button>
-        <button type="button" onClick={handleSubmit} disabled={submitted === true}>
+        <button
+          type="submit"
+          onClick={(event) => handleSubmit(event)}
+          disabled={submitted === true}
+        >
           Submit
         </button>
       </div>
       <Legends />
-    </>
+    </div>
   );
 };
 
