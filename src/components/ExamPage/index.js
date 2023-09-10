@@ -69,8 +69,6 @@ const Questions = () => {
     return <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />;
   }
 
-  console.log("visited", visited);
-
   return (
     <div>
       <Timer onSubmit={() => setSubmitted(true)} />

@@ -2,6 +2,8 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Legends from "./Legends";
 
+import "./Pallete.css";
+
 const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestionNavigation }) => {
   const findPalleteColor = (palleteIndex) => {
     if (currentIndex === palleteIndex) {
@@ -11,7 +13,7 @@ const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestion
     } else if (visited[palleteIndex] && userAnswer[palleteIndex] === null) {
       return "red";
     } else {
-      return "#808080";
+      return "#dddddd";
     }
   };
 
@@ -20,22 +22,19 @@ const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestion
   };
 
   return (
-    <Card>
+    <Card className="pallete-card">
       {Array.from({ length: totalPages }).map((_, index) => (
-        <span key={index}>
-          <button
-            key={index}
-            onClick={() => handleClick(index)}
-            style={{
-              backgroundColor: findPalleteColor(index),
-              padding: "10px",
-              marginTop: index >= 3 ? "0.4px" : "0",
-            }}
-          >
-            {index + 1}
-          </button>
-          {index === totalPages - 3 && <br />}
-        </span>
+        <button
+          key={index}
+          onClick={() => handleClick(index)}
+          className="pallete-btn"
+          style={{
+            backgroundColor: findPalleteColor(index),
+            color: currentIndex === index ? "white" : "block",
+          }}
+        >
+          {index + 1}
+        </button>
       ))}
 
       <Legends />
