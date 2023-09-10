@@ -6,7 +6,7 @@ import ExamPage from "./components/ExamPage";
 import "./App.css";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleLogin = (value) => {
     setIsLoggedIn(value);

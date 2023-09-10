@@ -19,7 +19,7 @@ const Pallete = ({ currentIndex, totalPages, visited, userAnswer, handleQuestion
   };
 
   return (
-    <div style={{ border: "1px solid black", padding: "50px" }}>
+    <div style={{ border: "1px solid black", padding: "50px", backgroundColor: "white" }}>
       {Array.from({ length: totalPages }).map((_, index) => (
         <span key={index}>
           <button
