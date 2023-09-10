@@ -104,7 +104,7 @@ const Questions = () => {
             >
               Reset{" "}
             </button>
-            <button type="button" onClick={submit} disabled={submitted === true}>
+            <button type="button" onClick={handleSubmit} disabled={submitted === true}>
               Submit
             </button>
           </div>
