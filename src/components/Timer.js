@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import TestEnds from "./TestEnds";
 
 const Timer = (props) => {
-  const { totalMarks, submit, submitted } = props;
+  const { submit, submitted } = props;
   const [time, setTime] = useState(12000);
   const [showMessage, setShowMessage] = useState(false);
 
@@ -32,9 +31,7 @@ const Timer = (props) => {
 
   return (
     <div>
-      {submitted ? (
-        <TestEnds totalMarks={totalMarks} />
-      ) : (
+      {!submitted && (
         <div>
           Time Left: {minutes.toString().padStart(2, "0") + "m"}:{" "}
           {seconds.toString().padStart(2, "0") + "s"}

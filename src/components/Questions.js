@@ -18,16 +18,17 @@ const QuizQuestions = ({ onDataReceived, index, userAnswer, handleOptionClick })
       answer: "Kolkata",
     },
     {
-      Question: "Capital of UP?",
+      question: "Capital of UP?",
       options: ["Delhi", "Kolkata", "UP", "Lucknow"],
       answer: "Lucknow",
     },
     {
-      Question: "Capital of Gujrat?",
+      question: "Capital of Gujrat?",
       options: ["Delhi", "Kolkata", "GandhiNagar", "Patna"],
       answer: "Gandhinagar",
     },
   ];
+
   useEffect(() => {
     onDataReceived(questionsAnswerData);
     // eslint-disable-next-line react-hooks/exhaustive-deps

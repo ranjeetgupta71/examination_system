@@ -4,14 +4,13 @@ import Timer from "../Timer";
 import Pallete from "../Pallete";
 import Question from "../Questions";
 import Legends from "../Legends";
+import ResultPage from "../ResultPage";
 
 const Questions = () => {
   const [index, setIndex] = useState(0);
   const [userAnswer, setUserAnswer] = useState(Array(5).fill(null));
-  const [totalMarks, setTotalMarks] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [visited, setVisited] = useState(Array(5).fill(false));
-  const totalPages = 5;
   const [questionsAnswerData, setQuestionsAnswerData] = useState([]);
 
   const handleData = (data) => {
@@ -29,6 +28,7 @@ const Questions = () => {
     const selectedOption = event.target.value;
     const updatedUserAnswer = [...userAnswer];
     updatedUserAnswer[index] = selectedOption;
+
     setUserAnswer(updatedUserAnswer);
   };
 
@@ -61,16 +61,6 @@ const Questions = () => {
 
   const submit = () => {
     setSubmitted(true);
-
-    for (let i = 0; i < questionsAnswerData.length; i++) {
-      var correctAnswer = questionsAnswerData[i].answer;
-      var userSelectedAnswer = userAnswer[i];
-
-      if (userSelectedAnswer === correctAnswer) {
-        setTotalMarks((prevState) => prevState + 1);
-        console.log("here");
-      }
-    }
   };
 
   const reset = () => {
@@ -81,29 +71,32 @@ const Questions = () => {
 
   return (
     <>
-      <Timer totalMarks={totalMarks} submit={submit} submitted={submitted} />
-      {!submitted && (
+      {submitted ? (
+        <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />
+      ) : (
         <>
-          <div style={{ display: "flex", flexDirection: "row" }}>
+          <Timer submit={submit} submitted={submitted} />
+          <div style={{ display: "flex", flexDirection: "col", margin: "20px" }}>
+            <Question
+              onDataReceived={handleData}
+              index={index}
+              userAnswer={userAnswer}
+              handleOptionClick={handleOptionClick}
+            />
             <Pallete
               index={index}
-              totalPages={totalPages}
+              totalPages={5}
               visited={visited}
               userAnswer={userAnswer}
               handleQuestionNavigation={handleQuestionNavigation}
             />
           </div>
-          <Question
-            onDataReceived={handleData}
-            index={index}
-            userAnswer={userAnswer}
-            handleOptionClick={handleOptionClick}
-          />
-          <div>
+
+          <div style={{ margin: "20px" }}>
             <button type="button" onClick={prev} disabled={index === 0}>
               Prev
             </button>
-            <button type="button" onClick={next} disabled={index === totalPages - 1}>
+            <button type="button" onClick={next} disabled={index === 4}>
               Next
             </button>
             <button type="button" onClick={reset} disabled={userAnswer[index] === null}>
