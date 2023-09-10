@@ -40,22 +40,18 @@ const Questions = () => {
     setCurrentQuestionIndex(indexFromPallete);
   };
 
-  const prev = () => {
+  const handlePrevious = () => {
     const updateVisitedArray = [...visited];
-    updateVisitedArray[currentQuestionIndex] = true;
+    updateVisitedArray[currentQuestionIndex - 1] = true;
     setVisited(updateVisitedArray);
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
-    }
+    setCurrentQuestionIndex((prevIndex) => prevIndex - 1);
   };
 
-  const next = () => {
+  const handleNext = () => {
     const updateVisitedArray = [...visited];
-    updateVisitedArray[currentQuestionIndex] = true;
+    updateVisitedArray[currentQuestionIndex + 1] = true;
     setVisited(updateVisitedArray);
-    if (currentQuestionIndex < 4) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-    }
+    setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
   };
 
   const handleSubmit = (event) => {
@@ -63,7 +59,7 @@ const Questions = () => {
     setSubmitted(true);
   };
 
-  const reset = () => {
+  const handleReset = () => {
     const updatedUserAnswer = [...userAnswer];
     updatedUserAnswer[currentQuestionIndex] = null;
     setUserAnswer(updatedUserAnswer);
@@ -72,6 +68,8 @@ const Questions = () => {
   if (submitted) {
     return <ResultPage userAnswer={userAnswer} questionsAnswerData={questionsAnswerData} />;
   }
+
+  console.log("visited", visited);
 
   return (
     <div>
@@ -82,32 +80,36 @@ const Questions = () => {
         userAnswer={userAnswer}
         handleOptionClick={handleOptionClick}
       />
-      {/* <Pallete
-          currentIndex={currentQuestionIndex}
-          totalPages={5}
-          visited={visited}
-          userAnswer={userAnswer}
-          handleQuestionNavigation={handleQuestionNavigation}
-        /> */}
+      <Pallete
+        currentIndex={currentQuestionIndex}
+        totalPages={5}
+        visited={visited}
+        userAnswer={userAnswer}
+        handleQuestionNavigation={handleQuestionNavigation}
+      />
 
-      {/* <div style={{ margin: "10px" }}>
-        <button type="button" onClick={prev} disabled={currentQuestionIndex === 0}>
+      <div style={{ margin: "10px" }}>
+        <button type="button" onClick={handlePrevious} disabled={currentQuestionIndex === 0}>
           Prev
         </button>
         <button
           type="button"
-          onClick={next}
+          onClick={handleNext}
           disabled={currentQuestionIndex === questionsAnswerData.length - 1}
         >
           Next
         </button>
-        <button type="button" onClick={reset} disabled={userAnswer[currentQuestionIndex] === null}>
+        <button
+          type="button"
+          onClick={handleReset}
+          disabled={userAnswer[currentQuestionIndex] === null}
+        >
           Reset{" "}
         </button>
         <button type="submit" onClick={handleSubmit} disabled={submitted}>
           Submit
         </button>
-      </div> */}
+      </div>
     </div>
   );
 };

@@ -10,17 +10,17 @@ const Timer = ({ onSubmit }) => {
   };
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const timerRef = setInterval(() => {
       handleTick();
     }, 1000);
 
     if (time === 0) {
       onSubmit();
-      clearInterval(timer);
+      clearInterval(timerRef);
     }
 
     return () => {
-      clearInterval(timer);
+      clearInterval(timerRef);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
