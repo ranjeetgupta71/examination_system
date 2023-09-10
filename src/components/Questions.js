@@ -35,33 +35,27 @@ const QuizQuestions = ({ onDataReceived, index, userAnswer, handleOptionClick })
   }, []);
 
   return (
-    <div>
-      <div>
-        <h1>
-          {index + 1}. {questionsAnswerData[index].question}
-        </h1>
-        <div className="quesOption">
-          <div>
-            <div>
-              <form className="options">
-                {Array.from({ length: 4 }).map((_, option) => (
-                  <label>
-                    <input
-                      type="radio"
-                      name={`choice_${index}`}
-                      value={`${questionsAnswerData[index].options[option]}`}
-                      onChange={handleOptionClick}
-                      checked={userAnswer[index] === questionsAnswerData[index].options[option]}
-                    />{" "}
-                    {questionsAnswerData[index].options[option]}
-                  </label>
-                ))}
-              </form>
-            </div>
-          </div>
-        </div>
+    <>
+      <h1>
+        {index + 1}. {questionsAnswerData[index].question}
+      </h1>
+      <div className="quesOption">
+        <form className="options">
+          {Array.from({ length: 4 }).map((_, option) => (
+            <label>
+              <input
+                type="radio"
+                name={`choice_${index}`}
+                value={`${questionsAnswerData[index].options[option]}`}
+                onChange={handleOptionClick}
+                checked={userAnswer[index] === questionsAnswerData[index].options[option]}
+              />{" "}
+              {questionsAnswerData[index].options[option]}
+            </label>
+          ))}
+        </form>
       </div>
-    </div>
+    </>
   );
 };
 export default QuizQuestions;
