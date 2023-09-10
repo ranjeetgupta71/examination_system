@@ -63,7 +63,7 @@ const Questions = () => {
     setSubmitted(true);
 
     for (let i = 0; i < questionsAnswerData.length; i++) {
-      var correctAnswer = questionsAnswerData[i].Answer;
+      var correctAnswer = questionsAnswerData[i].answer;
       var userSelectedAnswer = userAnswer[i];
 
       if (userSelectedAnswer === correctAnswer) {
